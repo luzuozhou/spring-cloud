@@ -1,0 +1,35 @@
+#注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: hystrix-client01
+server:
+  port: 8001
+#hystrix 配置
+hystrix:
+  shareSecurityContext: true #将SecurityContext分享给子线程，但是其他一些如Threadlocal变量还是没有传递
+  command:
+    default:
+      execution:
+        timeout:
+          enabled: true #如果设置为false execution.isolation.thread.timeoutInMilliseconds配置无效
+        isolation:
+          strategy: THREAD #THREAD | SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 1000
+            interruptOnTimeout: true
+            interruptOnFutureCancel: false
+    timeoutTest:
+      execution:
+        timeout:
+          enabled: true #如果设置为false execution.isolation.thread.timeoutInMilliseconds配置无效
+        isolation:
+          strategy: THREAD #THREAD | SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 3000
+            interruptOnTimeout: true
+            interruptOnFutureCancel: false
+
