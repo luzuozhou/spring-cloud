@@ -10,7 +10,9 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>eureka</module>
-        <module>hystrix-client01</module>
+        <module>hystrix-client</module>
+        <module>file-upload-server</module>
+        <module>file-upload-client</module>
     </modules>
 
     <properties>

@@ -1,0 +1,36 @@
+#注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  application:
+    name: file-upload-client
+server:
+  port: 8003
+
+#hystrix 配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1500
+        timeout:
+          enabled: true
+    "FileServerFeign#upload(MultipartFile,Long)":
+      execution:
+        timeout:
+          enabled: false
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 1000
+        readTimeout: 1000
+      file-upload-server:
+        connectTimeout: 1000
+        readTimeout: 10000
+  hystrix:
+    enabled: false

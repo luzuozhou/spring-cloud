@@ -1,8 +1,9 @@
-package com.luzuozhou.hystrix.client01.controller;
+package com.luzuozhou.hystrix.client.controller;
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -13,8 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class HelloController {
 
     @GetMapping("/hello")
-    public String helloWorld() {
-        return "Hello World！";
+    public String hello(@RequestParam(value = "time", defaultValue = "2000") Long time){
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "success";
     }
 
     @GetMapping("/propertiesTimeout")
