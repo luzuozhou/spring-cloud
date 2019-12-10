@@ -33,4 +33,4 @@ feign:
         connectTimeout: 1000
         readTimeout: 10000
   hystrix:
-    enabled: false
+    enabled: true
